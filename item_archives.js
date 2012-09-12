@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 'use strict';
 
 (function(jQuery) {
@@ -68,10 +72,9 @@
 			}
 		}
 		itemView += itemLimit;
-	}
+	};
 
 	jQuery.fn.screenToggle = function() {
-		var thisElem = jQuery(this);
 		if(jQuery('#screen').is(':checked')==true) {
 			thisElemGlobal.css('position', 'fixed');
 			thisElemGlobal.css('top', '0px');
@@ -86,7 +89,7 @@
 			thisElemGlobal.css('background-color', '');
 			thisElemGlobal.css('overflow', 'inherit');
 		}
-	}
+	};
 
 	var bottom_flag = false;
 	$(window).scroll(function () {
@@ -113,3 +116,6 @@
 		}
 	});
 })(jQuery);
+
+
+
