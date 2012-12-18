@@ -69,17 +69,11 @@
 			}
 		}
 		itemView += itemLimit;
-		if(itemView<itemsLen) {
-			jQuery('.asset-img-thumb:last').load(function() {
-				thisView.fadeTo('normal', '1.0');
-				jQuery('#info').empty().append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
-			});
-		} else {
-			jQuery('.asset-img-thumb:last').load(function() {
-				thisView.fadeTo('normal', '1.0');
-				jQuery('#info').empty();
-			});
-		}
+		jQuery('.asset-img-thumb:last').load(function(iView, iLen) {
+			thisView.fadeTo('normal', '1.0');
+			jQuery('#info').empty();
+			if(iView<iLen) jQuery('#info').append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
+		}(itemView, itemsLen));
 	};
 
 	jQuery.fn.screenToggle = function() {
