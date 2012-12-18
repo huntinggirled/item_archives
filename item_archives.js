@@ -50,28 +50,36 @@
 
 	jQuery.fn.loadItem = function() {
 		var items = itemData["items"];
+		var itemsLen = items.length;
 		if(items==undefined) return false;
 		var thisElem = jQuery(this);
 		thisElem.append('<div class="view" style="opacity:0.0;" />');
 		var thisView = thisElem.children('.view:last');
 		thisView.hide();
-		for(var i=itemView; i<items.length; i++) {
+		for(var i=itemView; i<itemsLen; i++) {
 			if(i>=itemView+itemLimit) break;
 			var item = items[i];
 			thisView
 			.append(
 				"<li class=\"item\"><a class=\"asset-image\" href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"asset-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a></li>"
 			);
-			if(items.length>i+itemLimit) {
+			if(itemsLen>i+itemLimit) {
 				var preloadItem = items[i+itemLimit];
 				jQuery('<img />').attr('src', preloadItem["thumbnail"]);
 			}
 		}
-		jQuery('.asset-img-thumb:last').load(function() {
-			thisView.fadeTo('normal', '1.0');
-			jQuery('#info').empty().append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
-		});
 		itemView += itemLimit;
+		if(itemView<itemsLen) {
+			jQuery('.asset-img-thumb:last').load(function() {
+				thisView.fadeTo('normal', '1.0');
+				jQuery('#info').empty().append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
+			});
+		} else {
+			jQuery('.asset-img-thumb:last').load(function() {
+				thisView.fadeTo('normal', '1.0');
+				jQuery('#info').empty();
+			});
+		}
 	};
 
 	jQuery.fn.screenToggle = function() {
