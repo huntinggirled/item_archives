@@ -62,7 +62,8 @@
 			thisView
 			.append(
 				"<li class=\"item\"><a class=\"asset-image\" href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"asset-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a></li>"
-			);
+			)
+			;
 			if(itemsLen>i+itemLimit) {
 				var preloadItem = items[i+itemLimit];
 				jQuery('<img />').attr('src', preloadItem["thumbnail"]);
