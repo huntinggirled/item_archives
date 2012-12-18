@@ -54,19 +54,14 @@
 		var thisElem = jQuery(this);
 		thisElem.append('<div class="view" style="opacity:0.0;" />');
 		var thisView = thisElem.children('.view:last');
-		jQuery('#info').empty();
+		thisView.hide();
 		for(var i=itemView; i<items.length; i++) {
-			if(i>=itemView+itemLimit) {
-				jQuery('#info').empty().append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
-				break;
-			}
+			if(i>=itemView+itemLimit) break;
 			var item = items[i];
 			thisView
 			.append(
 				"<li class=\"item\"><a class=\"asset-image\" href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"asset-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a></li>"
-			)
-			.css('display', 'none')
-			;
+			);
 			if(items.length>i+itemLimit) {
 				var preloadItem = items[i+itemLimit];
 				jQuery('<img />').attr('src', preloadItem["thumbnail"]);
@@ -74,6 +69,7 @@
 		}
 		jQuery('.asset-img-thumb:last').load(function() {
 			thisView.fadeTo('normal', '1.0');
+			jQuery('#info').empty().append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
 		});
 		itemView += itemLimit;
 	};
