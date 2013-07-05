@@ -15,14 +15,13 @@
 
 	jQuery('body').append(
 		'<div id="screennavi">'
-		+'<div><input id="screen" type="checkbox" onchange="jQuery(\'#item_archives\').screenToggle();return false;"> <a href="" onclick="document.getElementById(\'screen\').checked=(document.getElementById(\'screen\').checked==true)?false:true;jQuery(\'#item_archives\').screenToggle();return false;">ëSâÊñ ï\é¶</a></div>'
+		+'<div><input id="screen" type="checkbox" onchange="jQuery(\'#item_archives\').screenToggle();return false;"> <a href="" onclick="document.getElementById(\'screen\').checked=(document.getElementById(\'screen\').checked==true)?false:true;jQuery(\'#item_archives\').screenToggle();return false;">ÂÖ®ÁîªÈù¢Ë°®Á§∫</a></div>'
 		+'</div>'
 	);
 	jQuery('#screennavi')
 	.css('position', 'fixed')
 	.css('background', '#cccccc')
-	.css('line-height', '25px')
-	.css('padding', '10px')
+	.css('padding', '5px')
 	.css('bottom', '0px')
 	.css('right', '0px')
 	.css('z-index', '2000')
@@ -33,9 +32,9 @@
 	var itemView = 0;
 	var itemLimit = 50;
 	var itemData = [];
-	jQuery('#item_archives').after('<br style="clear:both;" /><div id="info" style="text-align:center;"></div>');
+	jQuery('#item_archives').after('<br style="clear:both;" /><div id="info" style="text-align:center;padding:5px;z-index:2000;"></div>');
 	var thisElemGlobal = jQuery('#item_archives');
-	jQuery('#info').empty().append('<img src="indi.gif" alt="ì«Ç›çûÇ›íÜ..." width="10px" height="10px" /> ì«Ç›çûÇ›íÜ...');
+	jQuery('#info').empty().append('<img src="indi.gif" alt="Ë™≠„ÅøËæº„Åø‰∏≠..." width="10" height="10" /> Ë™≠„ÅøËæº„Åø‰∏≠...');
 	jQuery.ajax({
 		url: '<$mt:BlogURL$>archives_jsonp.php',
 		dataType: 'jsonp',
@@ -51,17 +50,16 @@
 	jQuery.fn.loadItem = function() {
 		var items = itemData["items"];
 		var itemsLen = items.length;
-		if(items==undefined) return false;
+		if(items) return false;
 		var thisElem = jQuery(this);
 		thisElem.append('<div class="view" style="opacity:0.0;" />');
 		var thisView = thisElem.children('.view:last');
-		thisView.hide();
 		for(var i=itemView; i<itemsLen; i++) {
 			if(i>=itemView+itemLimit) break;
 			var item = items[i];
 			thisView
 			.append(
-				"<li class=\"item\"><a class=\"asset-image\" href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"asset-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a></li>"
+				"<a href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"widget-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a>"
 			)
 			;
 			if(itemsLen>i+itemLimit) {
@@ -70,11 +68,11 @@
 			}
 		}
 		itemView += itemLimit;
-		jQuery('.asset-img-thumb:last').load(function(iView, iLen) {
+		jQuery('.widget-img-thumb:last').load(function() {
 			thisView.fadeTo('normal', '1.0');
 			jQuery('#info').empty();
-			if(iView<iLen) jQuery('#info').append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">Ç≥ÇÁÇ…ì«Ç›çûÇﬁ</a>');
-		}(itemView, itemsLen));
+			if(itemView<itemsLen) jQuery('#info').append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">„Åï„Çâ„Å´Ë™≠„ÅøËæº„ÇÄ</a>');
+		});
 	};
 
 	jQuery.fn.screenToggle = function() {
@@ -84,13 +82,22 @@
 			thisElemGlobal.css('left', '0px');
 			thisElemGlobal.css('width', '100%');
 			thisElemGlobal.css('height', '100%');
-			thisElemGlobal.css('padding-top', '10px');
+			thisElemGlobal.css('padding', '10px');
 			thisElemGlobal.css('background-color', '#ffffff');
 			thisElemGlobal.css('overflow', 'auto');
+			jQuery('#info').css('position', 'fixed');
+			jQuery('#info').css('bottom', '0px');
+			jQuery('#info').css('left', '0px');
+			jQuery('#info').css('width', '100%');
+			jQuery('#info').css('background-color', '#ffffff');
+			jQuery('#info').css('overflow', 'auto');
 		} else {
 			thisElemGlobal.css('position', 'static');
 			thisElemGlobal.css('background-color', '');
 			thisElemGlobal.css('overflow', 'inherit');
+			jQuery('#info').css('position', 'static');
+			jQuery('#info').css('background-color', '');
+			jQuery('#info').css('overflow', 'inherit');
 		}
 	};
 
