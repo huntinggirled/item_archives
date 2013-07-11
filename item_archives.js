@@ -57,9 +57,10 @@
 		for(var i=itemView; i<itemsLen; i++) {
 			if(i>=itemView+itemLimit) break;
 			var item = items[i];
+			var datetime = item["datetime"].split(' ')[0].replace(/-0/g, '-');
 			thisView
 			.append(
-				"<a href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"widget-img-thumb\" alt=\""+item["datetime"]+" "+item["title"]+"\" title=\""+item["datetime"]+" "+item["title"]+"\" /></a>"
+				"<a href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"widget-img-thumb\" alt=\""+datetime+" "+item["title"]+"\" title=\""+datetime+" "+item["title"]+"\" /></a>"
 			)
 			;
 			if(itemsLen>i+itemLimit) {
