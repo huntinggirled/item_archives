@@ -59,7 +59,7 @@
 			var item = items[i];
 			thisView
 			.append(
-				"<a href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"widget-img-thumb\" alt=\""+item["date"]+" "+item["title"]+"\" title=\""+item["date"]+" "+item["title"]+"\" /></a>"
+				"<a href=\""+item["link"]+"\" target=\"_blank\"><img src=\""+item["thumbnail"]+"\" width=\"45\" height=\"45\" class=\"widget-img-thumb\" alt=\""+item["datetime"]+" "+item["title"]+"\" title=\""+item["datetime"]+" "+item["title"]+"\" /></a>"
 			)
 			;
 			if(itemsLen>i+itemLimit) {
