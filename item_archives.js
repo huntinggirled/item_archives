@@ -1,11 +1,5 @@
-/**
- *
- */
-
-'use strict';
-
 (function(jQuery) {
-
+	'use strict';
 	jQuery('#header')
 	.css('position', 'relative')
 	;
@@ -36,16 +30,18 @@
 	var thisElemGlobal = jQuery('#item_archives');
 	jQuery('#info').empty().append('<img src="indi.gif" alt="読み込み中..." width="10" height="10" /> 読み込み中...');
 	jQuery.ajax({
-		url: '<$mt:BlogURL$>archives_jsonp.php',
-		dataType: 'jsonp',
-		callback: 'callback',
-		timeout: 5000,
-		success: function(data, status){
-			itemData = data;
-			thisElemGlobal.loadItem();
-		},
-		error: function(xhr, status, errorThrown) {jQuery('#info').empty();}
-	});
+		url: '<$mt:BlogURL$>archives_jsonp.php'
+		,dataType: 'jsonp'
+		,callback: 'callback'
+		,timeout: 5000
+	})
+	.done(function(data, textStatus, jqXHR) {
+		itemData = data;
+		thisElemGlobal.loadItem();
+	})
+	.fail(function(jqXHR, textStatus, errorThrown) {jQuery('#info').empty();})
+	.always(function(data, textStatus, jqXHR) {})
+	;
 
 	jQuery.fn.loadItem = function() {
 		var items = itemData["items"];
