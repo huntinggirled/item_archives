@@ -1,5 +1,6 @@
 (function(jQuery) {
 	'use strict';
+
 	jQuery('#header')
 	.css('position', 'relative')
 	;
