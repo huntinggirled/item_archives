@@ -1,19 +1,19 @@
-(function(jQuery) {
+(function($) {
 	'use strict';
 
-	jQuery('#header')
+	$('#header')
 	.css('position', 'relative')
 	;
-	jQuery('#footer')
+	$('#footer')
 	.css('position', 'relative')
 	;
 
-	jQuery('body').append(
+	$('body').append(
 		'<div id="screennavi">'
-		+'<div><input id="screen" type="checkbox" onchange="jQuery(\'#item_archives\').screenToggle();return false;"> <a href="" onclick="document.getElementById(\'screen\').checked=(document.getElementById(\'screen\').checked==true)?false:true;jQuery(\'#item_archives\').screenToggle();return false;">全画面表示</a></div>'
+		+'<div><input id="screen" type="checkbox" onchange="$(\'#item_archives\').screenToggle();return false;"> <a href="" onclick="document.getElementById(\'screen\').checked=(document.getElementById(\'screen\').checked==true)?false:true;$(\'#item_archives\').screenToggle();return false;">全画面表示</a></div>'
 		+'</div>'
 	);
-	jQuery('#screennavi')
+	$('#screennavi')
 	.css('position', 'fixed')
 	.css('background', '#cccccc')
 	.css('padding', '5px')
@@ -27,10 +27,10 @@
 	var itemView = 0;
 	var itemLimit = 50;
 	var itemData = [];
-	jQuery('#item_archives').after('<br style="clear:both;" /><div id="info" style="text-align:center;padding:5px;z-index:2000;"></div>');
-	var thisElemGlobal = jQuery('#item_archives');
-	jQuery('#info').empty().append('<img src="indi.gif" alt="読み込み中..." width="10" height="10" /> 読み込み中...');
-	jQuery.ajax({
+	$('#item_archives').after('<br style="clear:both;" /><div id="info" style="text-align:center;padding:5px;z-index:2000;"></div>');
+	var thisElemGlobal = $('#item_archives');
+	$('#info').empty().append('<img src="img/indi.gif" alt="読み込み中..." width="10" height="10" /> 読み込み中...');
+	$.ajax({
 		url: '<$mt:BlogURL$>archives_jsonp.php'
 		,dataType: 'jsonp'
 		,callback: 'callback'
@@ -40,15 +40,15 @@
 		itemData = data;
 		thisElemGlobal.loadItem();
 	})
-	.fail(function(jqXHR, textStatus, errorThrown) {jQuery('#info').empty();})
+	.fail(function(jqXHR, textStatus, errorThrown) {$('#info').empty();})
 	.always(function(data, textStatus, jqXHR) {})
 	;
 
-	jQuery.fn.loadItem = function() {
+	$.fn.loadItem = function() {
 		var items = itemData["items"];
 		var itemsLen = items.length;
 		if(!items) return false;
-		var thisElem = jQuery(this);
+		var thisElem = $(this);
 		thisElem.append('<div class="view" style="opacity:0.0;" />');
 		var thisView = thisElem.children('.view:last');
 		for(var i=itemView; i<itemsLen; i++) {
@@ -62,19 +62,19 @@
 			;
 			if(itemsLen>i+itemLimit) {
 				var preloadItem = items[i+itemLimit];
-				jQuery('<img />').attr('src', preloadItem["thumbnail"]);
+				$('<img />').attr('src', preloadItem["thumbnail"]);
 			}
 		}
 		itemView += itemLimit;
-		jQuery('.widget-img-thumb:last').load(function() {
+		$('.widget-img-thumb:last').load(function() {
 			thisView.fadeTo('normal', '1.0');
-			jQuery('#info').empty();
-			if(itemView<itemsLen) jQuery('#info').append('<a href="" onmouseover="jQuery(\'#item_archives\').loadItem();return false;">さらに読み込む</a>');
+			$('#info').empty();
+			if(itemView<itemsLen) $('#info').append('<a href="" onmouseover="$(\'#item_archives\').loadItem();return false;">さらに読み込む</a>');
 		});
 	};
 
-	jQuery.fn.screenToggle = function() {
-		if(jQuery('#screen').is(':checked')==true) {
+	$.fn.screenToggle = function() {
+		if($('#screen').is(':checked')==true) {
 			thisElemGlobal.css('position', 'fixed');
 			thisElemGlobal.css('top', '0px');
 			thisElemGlobal.css('left', '0px');
@@ -83,19 +83,19 @@
 			thisElemGlobal.css('padding', '10px');
 			thisElemGlobal.css('background-color', '#ffffff');
 			thisElemGlobal.css('overflow', 'auto');
-			jQuery('#info').css('position', 'fixed');
-			jQuery('#info').css('bottom', '0px');
-			jQuery('#info').css('left', '0px');
-			jQuery('#info').css('width', '100%');
-			jQuery('#info').css('background-color', '#ffffff');
-			jQuery('#info').css('overflow', 'auto');
+			$('#info').css('position', 'fixed');
+			$('#info').css('bottom', '0px');
+			$('#info').css('left', '0px');
+			$('#info').css('width', '100%');
+			$('#info').css('background-color', '#ffffff');
+			$('#info').css('overflow', 'auto');
 		} else {
 			thisElemGlobal.css('position', 'static');
 			thisElemGlobal.css('background-color', '');
 			thisElemGlobal.css('overflow', 'inherit');
-			jQuery('#info').css('position', 'static');
-			jQuery('#info').css('background-color', '');
-			jQuery('#info').css('overflow', 'inherit');
+			$('#info').css('position', 'static');
+			$('#info').css('background-color', '');
+			$('#info').css('overflow', 'inherit');
 		}
 	};
 
