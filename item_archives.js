@@ -52,7 +52,12 @@
 		thisElem.append('<div class="view" style="opacity:0.0;" />');
 		var thisView = thisElem.children('.view:last');
 		for(var i=itemView; i<itemsLen; i++) {
-			if(i>=itemView+itemLimit) break;
+			if(!Object.keys(items[i]).length) {
+				continue;
+			}
+			if(i>=itemView+itemLimit) {
+				break;
+			}
 			var item = items[i];
 			var datetime = item["datetime"].split(' ')[0].replace(/-0/g, '-');
 			thisView
