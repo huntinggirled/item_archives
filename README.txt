@@ -1,2 +1,2 @@
-ハンチングクリップ: アイテムアーカイブ
-http://clip.girled.net/item_archives.html
+ハンチングガールド アイテムアーカイブ
+https://girled.net/item_archives.html
